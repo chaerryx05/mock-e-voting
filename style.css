@@ -5,8 +5,8 @@
 
 :root {
     --green-dark: #1B4D2E;
-    --green-mid: #2D8C4E;
-    --green-light: #4CAF73;
+    --green-mid: #238545;
+    --green-light: #3eac6a;
     --green-pale: #E8F5EE;
     --green-glow: rgba(45, 140, 78, 0.15);
     --bg: #FAFAF8;
@@ -49,19 +49,6 @@ body {
     min-height: 100vh;
     transition: background 0.3s ease, color 0.3s ease;
     -webkit-font-smoothing: antialiased;
-}
-
-/* ── THEME-AWARE SHOW/HIDE HELPERS ── */
-.page-flex {
-    display: flex !important;
-}
-
-.page-block {
-    display: block !important;
-}
-
-.page-hidden {
-    display: none !important;
 }
 
 /* ── NAVBAR ── */
@@ -192,7 +179,6 @@ html[data-theme="dark"] .navbar {
     font-size: 11px;
     font-weight: 500;
     transition: var(--transition);
-    text-decoration: none;
 }
 
 .nav-item.active {
@@ -271,7 +257,6 @@ html[data-theme="dark"] .navbar {
     font-family: 'DM Sans', sans-serif;
     cursor: pointer;
     transition: var(--transition);
-    text-decoration: none;
     width: 100%;
 }
 
@@ -457,48 +442,6 @@ html[data-theme="dark"] .navbar {
     transform: translateX(-50%) translateY(0);
 }
 
-/* ── MODAL ── */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 200;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
-
-.modal-overlay.open {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.modal-sheet {
-    background: var(--card);
-    border-radius: 24px 24px 0 0;
-    width: 100%;
-    max-width: 480px;
-    padding: 24px 24px 40px;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modal-overlay.open .modal-sheet {
-    transform: translateY(0);
-}
-
-.modal-handle {
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--border);
-    margin: 0 auto 20px;
-}
-
 /* ── PROGRESS BAR ── */
 .progress-bar {
     height: 6px;
@@ -541,24 +484,6 @@ html[data-theme="dark"] .navbar {
     font-size: 26px;
 }
 
-/* ── SKELETON ── */
-.skeleton {
-    background: linear-gradient(90deg, var(--border) 25%, var(--green-pale) 50%, var(--border) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 8px;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: 200% 0
-    }
-
-    100% {
-        background-position: -200% 0
-    }
-}
-
 /* ── FORM ── */
 .input-group {
     display: flex;
@@ -591,9 +516,7 @@ html[data-theme="dark"] .navbar {
     box-shadow: 0 0 0 3px var(--green-glow);
 }
 
-/* ══════════════════════════════════════════════
-       LANDING PAGE
-    ══════════════════════════════════════════════ */
+/* ══ LANDING PAGE ══ */
 #landing-page {
     min-height: 100vh;
     display: none;
@@ -618,7 +541,6 @@ html[data-theme="dark"] .navbar {
     line-height: 1.08;
     letter-spacing: -1.5px;
     color: var(--text);
-    margin-bottom: 4px;
 }
 
 .hero-headline .accent {
@@ -674,7 +596,6 @@ html[data-theme="dark"] .navbar {
     font-weight: 500;
 }
 
-/* Why section */
 .why-section {
     padding: 40px 24px 24px;
     max-width: 480px;
@@ -734,9 +655,7 @@ html[data-theme="dark"] .navbar {
     line-height: 1.5;
 }
 
-/* ══════════════════════════════════════════════
-       LOGIN PAGE
-    ══════════════════════════════════════════════ */
+/* ══ LOGIN PAGE ══ */
 #login-page {
     min-height: 100vh;
     display: none;
@@ -752,7 +671,7 @@ html[data-theme="dark"] .navbar {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .brand-icon-lg {
@@ -809,24 +728,15 @@ html[data-theme="dark"] .navbar {
     text-decoration: none;
 }
 
-/* ══════════════════════════════════════════════
-       MAIN APP
-    ══════════════════════════════════════════════ */
+/* ══ MAIN APP ══ */
 #main-app {
     display: none;
 }
 
-/* ── ELECTIONS PAGE ── */
-#elections-list {
-    padding: 0;
-}
-
-/* Election card variants */
 .election-card-live {
     border-left: 3px solid var(--green-mid);
 }
 
-/* Empty state */
 .empty-state {
     display: flex;
     flex-direction: column;
@@ -909,16 +819,106 @@ html[data-theme="dark"] .ballot-header {
     color: var(--subtext);
 }
 
-/* ── RESULTS PAGE ── */
-#results-list {
-    padding: 0;
+.ballot-nav-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 24px;
 }
 
-/* ── PROFILE PAGE ── */
-#profile-content {
-    padding: 0;
+/* ── CANDIDATE CARD ── */
+.candidate-card {
+    padding: 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: 2px solid var(--border);
+    background: var(--card);
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
+.candidate-card.selected {
+    border-color: var(--green-mid);
+    background: var(--green-pale);
+}
+
+.candidate-card:hover:not(.selected) {
+    border-color: var(--subtext);
+}
+
+.candidate-radio {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.candidate-card.selected .candidate-radio {
+    border-color: var(--green-mid);
+    background: var(--green-mid);
+}
+
+/* ── PREV BTN ── */
+.btn-prev {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--subtext);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-prev:hover {
+    border-color: var(--green-mid);
+    color: var(--green-mid);
+}
+
+.btn-prev:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ── LOGOUT BUTTON ── */
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.08);
+    color: #DC2626;
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.14);
+}
+
+/* ── PROFILE ── */
 .profile-section-label {
     font-size: 11px;
     font-weight: 700;
@@ -976,10 +976,6 @@ html[data-theme="dark"] .ballot-header {
     flex-shrink: 0;
 }
 
-.security-icon.warn {
-    background: rgba(239, 68, 68, 0.1);
-}
-
 .security-label {
     font-size: 14px;
     font-weight: 600;
@@ -1022,11 +1018,7 @@ html[data-theme="dark"] .ballot-header {
     transition: var(--transition);
 }
 
-/* ── NOTIFICATIONS PAGE ── */
-#notifications-list {
-    padding: 0;
-}
-
+/* ── NOTIFICATIONS ── */
 .notif-item {
     display: flex;
     align-items: flex-start;
@@ -1078,105 +1070,6 @@ html[data-theme="dark"] .ballot-header {
     flex-shrink: 0;
 }
 
-/* ── PREV/NEXT BALLOT NAV ── */
-.ballot-nav-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    margin-bottom: 24px;
-}
-
-/* ── CANDIDATE CARD ── */
-.candidate-card {
-    padding: 16px;
-    border-radius: var(--radius);
-    cursor: pointer;
-    border: 2px solid var(--border);
-    background: var(--card);
-    transition: border-color 0.2s, background 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.candidate-card.selected {
-    border-color: var(--green-mid);
-    background: var(--green-pale);
-}
-
-.candidate-card:hover:not(.selected) {
-    border-color: var(--subtext);
-}
-
-.candidate-radio {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: border-color 0.2s, background 0.2s;
-}
-
-.candidate-card.selected .candidate-radio {
-    border-color: var(--green-mid);
-    background: var(--green-mid);
-}
-
-.btn-prev {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background: transparent;
-    color: var(--subtext);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 13px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: var(--transition);
-    white-space: nowrap;
-}
-
-.btn-prev:hover {
-    border-color: var(--green-mid);
-    color: var(--green-mid);
-}
-
-.btn-prev:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-
-/* ── LOGOUT BUTTON ── */
-.btn-logout {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: rgba(239, 68, 68, 0.08);
-    color: #DC2626;
-    border: 1.5px solid rgba(239, 68, 68, 0.3);
-    border-radius: var(--radius-sm);
-    padding: 12px 24px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: var(--transition);
-    width: 100%;
-}
-
-.btn-logout:hover {
-    background: rgba(239, 68, 68, 0.14);
-}
-
 /* ── VOTING ACTIVITY EMPTY ── */
 .vote-empty {
     display: flex;
@@ -1194,4 +1087,51 @@ html[data-theme="dark"] .ballot-header {
 .vote-empty-text {
     font-size: 13px;
     color: var(--subtext);
+}
+
+/* ── DEMO DISCLAIMER ── */
+.demo-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.demo-disclaimer-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.demo-disclaimer-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #D97706;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.demo-disclaimer-body {
+    font-size: 12px;
+    color: var(--subtext);
+    line-height: 1.5;
+}
+
+/* ── CREATE ACCOUNT PAGE ── */
+#create-account-page {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 80px 20px 40px;
+    background: var(--bg);
+    overflow-y: auto;
 }
