@@ -15,338 +15,404 @@
 
 <body>
 
-    </head>
+    <div class="toast" id="toast"></div>
 
-    <body>
+    <div id="landing-page">
+        <nav class="navbar">
+            <a href="#" class="navbar-brand">
+                <div class="brand-icon"><span>i</span></div>
+                <span class="brand-name">iboto</span>
+            </a>
+            <div class="navbar-actions">
+                <button class="btn-icon" id="theme-btn-landing" onclick="toggleTheme()" title="Toggle theme"
+                    aria-label="Toggle theme">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
 
-        <!-- ══ TOAST ══ -->
-        <div class="toast" id="toast"></div>
+        <!-- Hero -->
+        <section class="landing-hero fade-up">
+            <h1 class="hero-headline">
+                Your Voice.<br>
+                <span class="accent">Your Vote.</span>
+            </h1>
+            <p class="hero-sub">
+                Decentralized blockchain-based e-voting for Colegio de Montalban's school organization electoral
+                process.
+            </p>
+            <div class="hero-actions fade-up-2">
+                <button class="btn-primary" onclick="showLogin()">Login to Vote</button>
+                <button class="btn-outline" onclick="showCreateAccount()">Create Account</button>
+            </div>
+            <div class="stats-row fade-up-3">
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Transparent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Tampering</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Verifiable</div>
+                </div>
+            </div>
+        </section>
 
-        <div id="landing-page">
-            <!-- Navbar (landing) -->
-            <nav class="navbar">
-                <a href="#" class="navbar-brand">
-                    <div class="brand-icon"><span>i</span></div>
-                    <span class="brand-name">iboto</span>
-                </a>
-                <div class="navbar-actions">
-                    <button class="btn-icon" id="theme-btn-landing" onclick="toggleTheme()" title="Toggle theme"
-                        aria-label="Toggle theme">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="5" />
-                            <path
-                                d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                        </svg>
-                    </button>
+        <!-- Why iboto? -->
+        <section class="why-section">
+            <div class="why-divider"></div>
+            <h2 class="why-title">Why iboto?</h2>
+            <div class="feature-card fade-up-2">
+                <div class="feature-icon">🔗</div>
+                <div>
+                    <div class="feature-title">Blockchain Immutable</div>
+                    <div class="feature-desc">Every vote is recorded as a transaction on the blockchain — permanent
+                        and
+                        tamper-proof.</div>
                 </div>
-            </nav>
+            </div>
+            <div class="feature-card fade-up-3">
+                <div class="feature-icon">🔐</div>
+                <div>
+                    <div class="feature-title">Face Recognition Auth</div>
+                    <div class="feature-desc">Biometric verification ensures only eligible students can cast their
+                        vote.
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card fade-up-4">
+                <div class="feature-icon">📊</div>
+                <div>
+                    <div class="feature-title">Real-time Results</div>
+                    <div class="feature-desc">Watch results update live as votes are tallied — fully transparent to
+                        the
+                        entire school.</div>
+                </div>
+            </div>
+            <div class="feature-card fade-up-5">
+                <div class="feature-icon">📲</div>
+                <div>
+                    <div class="feature-title">SMS OTP Verification</div>
+                    <div class="feature-desc">Two-factor authentication via SMS adds an extra layer of voter
+                        security.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-            <!-- Hero -->
-            <section class="landing-hero fade-up">
-                <h1 class="hero-headline">
-                    Your Voice.<br>
-                    <span class="accent">Your Vote.</span>
-                </h1>
-                <p class="hero-sub">
-                    Decentralized blockchain-based e-voting for Colegio de Montalban's school organization electoral
-                    process.
-                </p>
-                <div class="hero-actions fade-up-2">
-                    <button class="btn-primary" onclick="showLogin()">Login to Vote</button>
-                    <button class="btn-outline" onclick="showToast('Registration coming soon!')">Create Account</button>
-                </div>
-                <div class="stats-row fade-up-3">
-                    <div class="stat-card">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Transparent</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">0%</div>
-                        <div class="stat-label">Tampering</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">24/7</div>
-                        <div class="stat-label">Verifiable</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Why iboto? -->
-            <section class="why-section">
-                <div class="why-divider"></div>
-                <h2 class="why-title">Why iboto?</h2>
-                <div class="feature-card fade-up-2">
-                    <div class="feature-icon">🔗</div>
-                    <div>
-                        <div class="feature-title">Blockchain Immutable</div>
-                        <div class="feature-desc">Every vote is recorded as a transaction on the blockchain — permanent
-                            and
-                            tamper-proof.</div>
-                    </div>
-                </div>
-                <div class="feature-card fade-up-3">
-                    <div class="feature-icon">🔐</div>
-                    <div>
-                        <div class="feature-title">Face Recognition Auth</div>
-                        <div class="feature-desc">Biometric verification ensures only eligible students can cast their
-                            vote.
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-card fade-up-4">
-                    <div class="feature-icon">📊</div>
-                    <div>
-                        <div class="feature-title">Real-time Results</div>
-                        <div class="feature-desc">Watch results update live as votes are tallied — fully transparent to
-                            the
-                            entire school.</div>
-                    </div>
-                </div>
-                <div class="feature-card fade-up-5">
-                    <div class="feature-icon">📲</div>
-                    <div>
-                        <div class="feature-title">SMS OTP Verification</div>
-                        <div class="feature-desc">Two-factor authentication via SMS adds an extra layer of voter
-                            security.
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <div id="login-page">
+        <button id="theme-btn-login" onclick="toggleTheme()"
+            style="position:fixed;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--subtext);box-shadow:var(--shadow);transition:var(--transition)"
+            title="Toggle theme" aria-label="Toggle theme"></button>
+        <div class="login-logo">
+            <div class="brand-icon-lg"><span>i</span></div>
+            <span class="brand-name" style="font-size:22px">iboto</span>
         </div>
 
-        <!-- ════════════════════════════════════════════════
-     LOGIN PAGE
-════════════════════════════════════════════════ -->
-        <div id="login-page">
-            <button id="theme-btn-login" onclick="toggleTheme()"
-                style="position:fixed;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--subtext);box-shadow:var(--shadow);transition:var(--transition)"
-                title="Toggle theme" aria-label="Toggle theme"></button>
-            <div class="login-logo">
-                <div class="brand-icon-lg"><span>i</span></div>
-                <span class="brand-name" style="font-size:22px">iboto</span>
-            </div>
-            <div class="login-card">
-                <h2 class="login-title">Welcome back</h2>
-                <p class="login-sub">Sign in to access your ballot</p>
-                <div class="input-group">
-                    <label class="input-label" for="login-id">Student ID</label>
-                    <input id="login-id" type="text" class="input-field" placeholder="e.g. 21-99999"
-                        autocomplete="username" />
-                </div>
-                <div class="input-group">
-                    <label class="input-label" for="login-pass">Password</label>
-                    <input id="login-pass" type="password" class="input-field" placeholder="••••••••"
-                        autocomplete="current-password" />
-                </div>
-                <button class="btn-primary" onclick="handleLogin()" style="margin-top:8px">Login to Vote</button>
-                <div
-                    style="margin-top:16px;padding:12px;background:var(--green-pale);border:1px solid rgba(45,140,78,0.2);border-radius:10px;text-align:center">
-                    <p style="font-size:12px;color:var(--subtext);margin-bottom:8px">📋 Survey participant? Use a
-                        provided
-                        account:</p>
-                    <button onclick="showAccountsList()"
-                        style="background:var(--green-mid);color:white;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%">
-                        👥 View Available Accounts
-                    </button>
-                </div>
-                <p class="login-footer">
-                    Don't have an account? <a href="#" onclick="showToast('Registration coming soon!')">Create one</a>
-                </p>
+        <!-- ── DEMO DISCLAIMER ── -->
+        <div class="demo-disclaimer">
+            <div class="demo-disclaimer-icon">🧪</div>
+            <div>
+                <div class="demo-disclaimer-title">Demo System</div>
+                <div class="demo-disclaimer-body">This is a <strong>prototype demo</strong> of the iboto (e-voting
+                    system), created for survey and research purposes only. No real votes are being cast. All data is
+                    simulated.</div>
             </div>
         </div>
 
-        <div id="main-app">
+        <div class="login-card">
+            <h2 class="login-title">Welcome back</h2>
+            <p class="login-sub">Sign in to access your ballot</p>
+            <div class="input-group">
+                <label class="input-label" for="login-id">Student ID</label>
+                <input id="login-id" type="text" class="input-field" placeholder="e.g. 21-99999"
+                    autocomplete="username" />
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="login-pass">Password</label>
+                <input id="login-pass" type="password" class="input-field" placeholder="••••••••"
+                    autocomplete="current-password" />
+            </div>
+            <button class="btn-primary" onclick="handleLogin()" style="margin-top:8px">Login to Vote</button>
+            <div
+                style="margin-top:16px;padding:12px;background:var(--green-pale);border:1px solid rgba(45,140,78,0.2);border-radius:10px;text-align:center">
+                <p style="font-size:12px;color:var(--subtext);margin-bottom:8px">📋 You can either sign in with a
+                    provided demo account or create your own student account.</p>
+                <button onclick="showAccountsList()"
+                    style="background:var(--green-mid);color:white;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%">
+                    👥 View Available Accounts
+                </button>
+            </div>
+            <p class="login-footer">
+                Don't have an account? <a href="#" onclick="goToCreateAccount()">Create one</a>
+            </p>
+        </div>
+    </div>
 
-            <!-- ── Shared Navbar ── -->
-            <nav class="navbar">
-                <a href="#" class="navbar-brand">
-                    <div class="brand-icon"><span>i</span></div>
-                    <span class="brand-name">iboto</span>
-                </a>
-                <div class="navbar-actions">
-                    <button class="btn-icon" id="theme-btn" onclick="toggleTheme()" title="Toggle theme"
-                        aria-label="Toggle theme">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="5" />
-                            <path
-                                d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                        </svg>
-                    </button>
-                    <button class="btn-sign" onclick="handleLogout()">Sign out</button>
-                </div>
-            </nav>
+    <div id="create-account-page">
+        <button id="theme-btn-create" onclick="toggleTheme()"
+            style="position:fixed;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--subtext);box-shadow:var(--shadow);transition:var(--transition)"
+            title="Toggle theme" aria-label="Toggle theme"></button>
 
-            <!-- ── ELECTIONS PAGE ── -->
-            <div class="page active" id="page-elections">
-                <div class="container">
-                    <div id="elections-list"></div>
+        <div style="position:fixed;top:16px;left:16px">
+            <button onclick="showLogin()"
+                style="background:none;border:none;cursor:pointer;color:var(--subtext);display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+                Back
+            </button>
+        </div>
+
+        <div class="login-logo" style="margin-top:48px">
+            <div class="brand-icon-lg"><span>i</span></div>
+            <span class="brand-name" style="font-size:22px">iboto</span>
+        </div>
+
+        <!-- ── DEMO DISCLAIMER ── -->
+        <div class="demo-disclaimer">
+            <div class="demo-disclaimer-icon">🧪</div>
+            <div>
+                <div class="demo-disclaimer-title">Demo System</div>
+                <div class="demo-disclaimer-body">This is a <strong>prototype demo</strong>. Your account is stored
+                    locally for this survey session only.</div>
+            </div>
+        </div>
+
+        <div class="login-card">
+            <h2 class="login-title">Create Account</h2>
+            <p class="login-sub">Register as a survey voter</p>
+
+            <div class="input-group">
+                <label class="input-label" for="reg-name">Full Name</label>
+                <input id="reg-name" type="text" class="input-field" placeholder="e.g. Juan dela Cruz" />
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="reg-id">Student ID</label>
+                <input id="reg-id" type="text" class="input-field" placeholder="e.g. 21-99999" />
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="reg-course">Course</label>
+                <select id="reg-course" class="input-field" style="cursor:pointer">
+                    <option value="">Select course</option>
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSCS">BSCPE</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="reg-section">Year & Section</label>
+                <input id="reg-section" type="text" class="input-field" placeholder="e.g. 2C" />
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="reg-pass">Password</label>
+                <input id="reg-pass" type="password" class="input-field" placeholder="At least 6 characters" />
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="reg-pass2">Confirm Password</label>
+                <input id="reg-pass2" type="password" class="input-field" placeholder="Repeat password" />
+            </div>
+            <div id="reg-error"
+                style="display:none;margin-bottom:12px;padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#DC2626;border-radius:8px;font-size:13px">
+            </div>
+            <button class="btn-primary" onclick="handleRegister()">Create Account →</button>
+            <p class="login-footer">
+                Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="main-app">
+
+        <!-- ── Shared Navbar ── -->
+        <nav class="navbar">
+            <a href="#" class="navbar-brand">
+                <div class="brand-icon"><span>i</span></div>
+                <span class="brand-name">iboto</span>
+            </a>
+            <div class="navbar-actions">
+                <button class="btn-icon" id="theme-btn" onclick="toggleTheme()" title="Toggle theme"
+                    aria-label="Toggle theme">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+                <button class="btn-sign" onclick="handleLogout()">Sign out</button>
+            </div>
+        </nav>
+
+        <!-- ── ELECTIONS PAGE ── -->
+        <div class="page active" id="page-elections">
+            <div class="container">
+                <div id="elections-list"></div>
+            </div>
+        </div>
+
+        <!-- ── RESULTS PAGE ── -->
+        <div class="page" id="page-results">
+            <div class="container">
+                <div id="results-list"></div>
+            </div>
+        </div>
+
+        <!-- ── PROFILE PAGE ── -->
+        <div class="page" id="page-profile">
+            <div class="container">
+                <div id="profile-content"></div>
+            </div>
+        </div>
+
+        <!-- ── NOTIFICATIONS PAGE ── -->
+        <div class="page" id="page-notifications">
+            <div class="container">
+                <div id="notifications-list"></div>
+            </div>
+        </div>
+
+        <!-- ── PASSWORD VERIFY MODAL (full-screen, before voting) ── -->
+        <div id="verify-modal" style="
+        display:none; position:fixed; inset:0; z-index:300;
+        background:var(--bg); flex-direction:column;
+        align-items:center; justify-content:center; padding:24px 20px;">
+
+            <!-- Header bar -->
+            <div
+                style="position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--border)">
+                <button onclick="closeVerifyModal()"
+                    style="background:none;border:none;cursor:pointer;color:var(--subtext);display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                    Cancel
+                </button>
+                <div style="display:flex;align-items:center;gap:8px">
+                    <div class="brand-icon" style="width:28px;height:28px;border-radius:7px"><span
+                            style="font-size:14px">i</span></div>
+                    <span class="brand-name" style="font-size:16px">iboto</span>
                 </div>
+                <div style="width:70px"></div>
             </div>
 
-            <!-- ── RESULTS PAGE ── -->
-            <div class="page" id="page-results">
-                <div class="container">
-                    <div id="results-list"></div>
+            <!-- Card -->
+            <div style="
+            background:var(--card); border:1px solid var(--border);
+            border-radius:24px; padding:36px 28px;
+            width:100%; max-width:400px; box-shadow:var(--shadow-lg);
+            text-align:center;">
+
+                <!-- Shield icon -->
+                <div style="
+                width:72px; height:72px; border-radius:20px;
+                background:linear-gradient(135deg,var(--green-dark),var(--green-mid));
+                display:flex; align-items:center; justify-content:center;
+                margin:0 auto 24px; box-shadow:0 8px 24px rgba(45,140,78,0.3);">
+                    <svg width="36" height="36" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                 </div>
-            </div>
 
-            <!-- ── PROFILE PAGE ── -->
-            <div class="page" id="page-profile">
-                <div class="container">
-                    <div id="profile-content"></div>
+                <h2
+                    style="font-family:'Playfair Display',serif;font-size:24px;font-weight:800;margin-bottom:8px;color:var(--text)">
+                    Verify your identity</h2>
+                <p style="font-size:14px;color:var(--subtext);line-height:1.6;margin-bottom:28px">Enter your
+                    password to confirm your identity before voting.</p>
+
+                <!-- Password input -->
+                <div style="text-align:left;margin-bottom:20px">
+                    <label
+                        style="font-size:12px;font-weight:700;color:var(--subtext);letter-spacing:0.6px;text-transform:uppercase;display:block;margin-bottom:8px">Password</label>
+                    <input id="verify-password" type="password" class="input-field" placeholder="Enter your password"
+                        style="text-align:left" onkeydown="if(event.key==='Enter')confirmIdentity()" />
+                    <div id="verify-error"
+                        style="display:none;margin-top:8px;padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#DC2626;border-radius:8px;font-size:13px;text-align:left">
+                    </div>
                 </div>
+
+                <button class="btn-primary" onclick="confirmIdentity()">
+                    Confirm Identity →
+                </button>
             </div>
+        </div>
 
-            <!-- ── NOTIFICATIONS PAGE ── -->
-            <div class="page" id="page-notifications">
-                <div class="container">
-                    <div id="notifications-list"></div>
-                </div>
-            </div>
-
-            <!-- ── PASSWORD VERIFY MODAL (full-screen, before voting) ── -->
-            <div id="verify-modal" style="
-            display:none; position:fixed; inset:0; z-index:300;
-            background:var(--bg); flex-direction:column;
-            align-items:center; justify-content:center; padding:24px 20px;">
-
-                <!-- Header bar -->
-                <div
-                    style="position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--border)">
-                    <button onclick="closeVerifyModal()"
-                        style="background:none;border:none;cursor:pointer;color:var(--subtext);display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+        <!-- ── BALLOT PAGE (full-screen overlay) ── -->
+        <div id="ballot-page">
+            <div class="ballot-header">
+                <div class="ballot-header-top">
+                    <button class="btn-icon" onclick="prevBallotPosition()" aria-label="Back">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
                             <path d="M15 18l-6-6 6-6" />
                         </svg>
-                        Cancel
                     </button>
-                    <div style="display:flex;align-items:center;gap:8px">
-                        <div class="brand-icon" style="width:28px;height:28px;border-radius:7px"><span
-                                style="font-size:14px">i</span></div>
-                        <span class="brand-name" style="font-size:16px">iboto</span>
-                    </div>
-                    <div style="width:70px"></div>
+                    <span class="ballot-title" id="ballot-title">SSG General Election 2026</span>
+                    <span class="ballot-step" id="ballot-step">Position 1 of 4</span>
                 </div>
-
-                <!-- Card -->
-                <div style="
-                background:var(--card); border:1px solid var(--border);
-                border-radius:24px; padding:36px 28px;
-                width:100%; max-width:400px; box-shadow:var(--shadow-lg);
-                text-align:center;">
-
-                    <!-- Shield icon -->
-                    <div style="
-                    width:72px; height:72px; border-radius:20px;
-                    background:linear-gradient(135deg,var(--green-dark),var(--green-mid));
-                    display:flex; align-items:center; justify-content:center;
-                    margin:0 auto 24px; box-shadow:0 8px 24px rgba(45,140,78,0.3);">
-                        <svg width="36" height="36" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <div class="progress-bar">
+                    <div class="progress-fill" id="ballot-progress-fill" style="width:0%"></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top:24px">
+                <div id="ballot-candidates"></div>
+                <div class="ballot-nav-row">
+                    <button class="btn-prev" id="ballot-prev-btn" onclick="prevBallotPosition()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" />
                         </svg>
-                    </div>
-
-                    <h2
-                        style="font-family:'Playfair Display',serif;font-size:24px;font-weight:800;margin-bottom:8px;color:var(--text)">
-                        Verify your identity</h2>
-                    <p style="font-size:14px;color:var(--subtext);line-height:1.6;margin-bottom:28px">Enter your
-                        password to confirm your identity before voting.</p>
-
-                    <!-- Password input -->
-                    <div style="text-align:left;margin-bottom:20px">
-                        <label
-                            style="font-size:12px;font-weight:700;color:var(--subtext);letter-spacing:0.6px;text-transform:uppercase;display:block;margin-bottom:8px">Password</label>
-                        <input id="verify-password" type="password" class="input-field"
-                            placeholder="Enter your password" style="text-align:left"
-                            onkeydown="if(event.key==='Enter')confirmIdentity()" />
-                        <div id="verify-error"
-                            style="display:none;margin-top:8px;padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#DC2626;border-radius:8px;font-size:13px;text-align:left">
-                        </div>
-                    </div>
-
-                    <button class="btn-primary" onclick="confirmIdentity()">
-                        Confirm Identity →
+                        Previous
                     </button>
+                    <button class="btn-primary" id="ballot-next-btn" style="flex:1">Next Position →</button>
                 </div>
             </div>
+        </div>
 
-            <!-- ── BALLOT PAGE (full-screen overlay) ── -->
-            <div id="ballot-page">
-                <div class="ballot-header">
-                    <div class="ballot-header-top">
-                        <button class="btn-icon" onclick="prevBallotPosition()" aria-label="Back">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path d="M15 18l-6-6 6-6" />
-                            </svg>
-                        </button>
-                        <span class="ballot-title" id="ballot-title">SSG General Election 2026</span>
-                        <span class="ballot-step" id="ballot-step">Position 1 of 4</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="ballot-progress-fill" style="width:0%"></div>
-                    </div>
-                </div>
-                <div class="container" style="padding-top:24px">
-                    <div id="ballot-candidates"></div>
-                    <div class="ballot-nav-row">
-                        <button class="btn-prev" id="ballot-prev-btn" onclick="prevBallotPosition()">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path d="M15 18l-6-6 6-6" />
-                            </svg>
-                            Previous
-                        </button>
-                        <button class="btn-primary" id="ballot-next-btn" style="flex:1">Next Position →</button>
-                    </div>
-                </div>
-            </div>
+        <!-- ── BOTTOM NAV ── -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-page="elections" onclick="navigate('elections')">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                Elections
+            </button>
+            <button class="nav-item" data-page="results" onclick="navigate('results')">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+                Results
+            </button>
+            <button class="nav-item" data-page="notifications" onclick="navigate('notifications')">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 01-3.46 0" />
+                </svg>
+                Alerts
+            </button>
+            <button class="nav-item" data-page="profile" onclick="navigate('profile')">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                Profile
+            </button>
+        </nav>
 
-            <!-- ── BOTTOM NAV ── -->
-            <nav class="bottom-nav">
-                <button class="nav-item active" data-page="elections" onclick="navigate('elections')">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
-                        viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="7" height="7" rx="1" />
-                        <rect x="14" y="3" width="7" height="7" rx="1" />
-                        <rect x="3" y="14" width="7" height="7" rx="1" />
-                        <rect x="14" y="14" width="7" height="7" rx="1" />
-                    </svg>
-                    Elections
-                </button>
-                <button class="nav-item" data-page="results" onclick="navigate('results')">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
-                        viewBox="0 0 24 24">
-                        <line x1="18" y1="20" x2="18" y2="10" />
-                        <line x1="12" y1="20" x2="12" y2="4" />
-                        <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                    Results
-                </button>
-                <button class="nav-item" data-page="notifications" onclick="navigate('notifications')">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
-                        viewBox="0 0 24 24">
-                        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                        <path d="M13.73 21a2 2 0 01-3.46 0" />
-                    </svg>
-                    Alerts
-                </button>
-                <button class="nav-item" data-page="profile" onclick="navigate('profile')">
-                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
-                        viewBox="0 0 24 24">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    Profile
-                </button>
-            </nav>
+    </div><!-- /main-app -->
 
-        </div><!-- /main-app -->
-
-        <script src="script.js"></script>
-    </body>
+    <script src="script.js"></script>
+</body>
 
 </html>
