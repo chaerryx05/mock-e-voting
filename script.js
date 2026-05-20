@@ -1,9 +1,3 @@
-/* ══════════════════════════════════════════════
-   iboto — Student E-Voting System
-   JavaScript  |  script.js
-══════════════════════════════════════════════ */
-
-// ── MOCK ACCOUNTS (for survey participants) ──
 const ACCOUNTS = {
   "21-00001": { password: "iboto123", name: "Maria Clara Santos", studentId: "21-00001", course: "BSIT", yearSection: "2C", email: "maria.santos@cdm.edu.ph", birthday: "March 12, 2003", address: "Montalban, Rizal", phone: "09171234001", memberSince: "June 2021", faceEnrolled: true, votingHistory: ["SSG General Election 2025"] },
   "21-00002": { password: "iboto123", name: "Jose Rizal Dela Cruz", studentId: "21-00002", course: "BSIT", yearSection: "2C", email: "jose.delacruz@cdm.edu.ph", birthday: "July 4, 2002", address: "San Mateo, Rizal", phone: "09171234002", memberSince: "June 2021", faceEnrolled: true, votingHistory: ["SSG General Election 2025"] },
@@ -17,90 +11,91 @@ const ACCOUNTS = {
   "21-00010": { password: "iboto123", name: "Ramon Lapu-Lapu Aquino", studentId: "21-00010", course: "BSCS", yearSection: "2B", email: "ramon.aquino@cdm.edu.ph", birthday: "April 27, 2002", address: "Rodriguez, Rizal", phone: "09171234010", memberSince: "June 2021", faceEnrolled: true, votingHistory: ["SSG General Election 2025"] },
 };
 
-// Active student session (set on login)
 let STUDENT = null;
 
+// ── ELECTIONS DATA ──
 const ELECTIONS = [
   {
     id: 1, name: "SSG General Election 2026", status: "live",
     candidates: 22, startDate: "May 20, 2026", endDate: "May 21, 2026",
     hasVoted: false,
+    voterIds: [],
     positions: [
       {
         title: "President",
         candidates: [
-          { id: 1, name: "Juan dela Cruz", partylist: "Alyansa", motto: "Leadership with Integrity", votes: 0 },
-          { id: 2, name: "Maria Santos", partylist: "Bagong Simula", motto: "Progress Through Unity", votes: 0 },
+          { id: 1, name: "Juan dela Cruz", partylist: "Alyansa", motto: "Leadership with Integrity", votes: 47 },
+          { id: 2, name: "Maria Santos", partylist: "Bagong Simula", motto: "Progress Through Unity", votes: 41 },
         ]
       },
       {
         title: "Vice President",
         candidates: [
-          { id: 3, name: "Pedro Reyes", partylist: "Alyansa", motto: "Service Above Self", votes: 0 },
-          { id: 4, name: "Ana Lim", partylist: "Bagong Simula", motto: "Students First Always", votes: 0 },
+          { id: 3, name: "Pedro Reyes", partylist: "Alyansa", motto: "Service Above Self", votes: 44 },
+          { id: 4, name: "Ana Lim", partylist: "Bagong Simula", motto: "Students First Always", votes: 44 },
         ]
       },
       {
         title: "Secretary",
         candidates: [
-          { id: 5, name: "Carlo Bautista", partylist: "Alyansa", motto: "Organized for Excellence", votes: 0 },
-          { id: 6, name: "Luz Mendoza", partylist: "Bagong Simula", motto: "Your Voice, Our Action", votes: 0 },
+          { id: 5, name: "Carlo Bautista", partylist: "Alyansa", motto: "Organized for Excellence", votes: 50 },
+          { id: 6, name: "Luz Mendoza", partylist: "Bagong Simula", motto: "Your Voice, Our Action", votes: 38 },
         ]
       },
       {
         title: "Assistant Secretary",
         candidates: [
-          { id: 7, name: "Rico Villanueva", partylist: "Alyansa", motto: "Precision in Every Record", votes: 0 },
-          { id: 8, name: "Sofia Cruz", partylist: "Bagong Simula", motto: "Clarity and Coordination Always", votes: 0 },
+          { id: 7, name: "Rico Villanueva", partylist: "Alyansa", motto: "Precision in Every Record", votes: 46 },
+          { id: 8, name: "Sofia Cruz", partylist: "Bagong Simula", motto: "Clarity and Coordination Always", votes: 42 },
         ]
       },
       {
         title: "Treasurer",
         candidates: [
-          { id: 9, name: "Samantha Sanchez", partylist: "Alyansa", motto: "Accountability Matters", votes: 0 },
-          { id: 10, name: "Diana Crisostomo", partylist: "Bagong Simula", motto: "Budget for All", votes: 0 },
+          { id: 9, name: "Samantha Sanchez", partylist: "Alyansa", motto: "Accountability Matters", votes: 48 },
+          { id: 10, name: "Diana Crisostomo", partylist: "Bagong Simula", motto: "Budget for All", votes: 40 },
         ]
       },
       {
         title: "Auditor",
         candidates: [
-          { id: 11, name: "Ace Soriano", partylist: "Alyansa", motto: "Transparency Builds Trust", votes: 0 },
-          { id: 12, name: "Mika Solidad", partylist: "Bagong Simula", motto: "Fairness in Every Audit", votes: 0 },
+          { id: 11, name: "Ace Soriano", partylist: "Alyansa", motto: "Transparency Builds Trust", votes: 43 },
+          { id: 12, name: "Mika Solidad", partylist: "Bagong Simula", motto: "Fairness in Every Audit", votes: 45 },
         ]
       },
       {
         title: "Business Manager",
         candidates: [
-          { id: 13, name: "Carlos Dela Cruz", partylist: "Alyansa", motto: "Smart Management for Students", votes: 0 },
-          { id: 14, name: "Luisa Reyes", partylist: "Bagong Simula", motto: "Efficiency with Purpose", votes: 0 },
+          { id: 13, name: "Carlos Dela Cruz", partylist: "Alyansa", motto: "Smart Management for Students", votes: 49 },
+          { id: 14, name: "Luisa Reyes", partylist: "Bagong Simula", motto: "Efficiency with Purpose", votes: 39 },
         ]
       },
       {
-        title: "Public Information Officer(P.I.O)",
+        title: "Public Information Officer (P.I.O)",
         candidates: [
-          { id: 15, name: "John Retada", partylist: "Alyansa", motto: "Truth to Every Student", votes: 0 },
-          { id: 16, name: "Jane Sison", partylist: "Bagong Simula", motto: "Information for Empowerment", votes: 0 },
+          { id: 15, name: "John Retada", partylist: "Alyansa", motto: "Truth to Every Student", votes: 51 },
+          { id: 16, name: "Jane Sison", partylist: "Bagong Simula", motto: "Information for Empowerment", votes: 37 },
         ]
       },
       {
         title: "4th Year Senator",
         candidates: [
-          { id: 17, name: "Alexandra Santos", partylist: "Alyansa", motto: "Experience Leads Change", votes: 0 },
-          { id: 18, name: "Alyssa Martin", partylist: "Bagong Simula", motto: "Senior Voice, Strong Action", votes: 0 },
+          { id: 17, name: "Alexandra Santos", partylist: "Alyansa", motto: "Experience Leads Change", votes: 46 },
+          { id: 18, name: "Alyssa Martin", partylist: "Bagong Simula", motto: "Senior Voice, Strong Action", votes: 42 },
         ]
       },
       {
         title: "3rd Year Senator",
         candidates: [
-          { id: 19, name: "Michael Torres", partylist: "Alyansa", motto: "Middle Years, Bold Ideas", votes: 0 },
-          { id: 20, name: "Angela Aquino", partylist: "Bagong Simula", motto: "Future in Motion", votes: 0 },
+          { id: 19, name: "Michael Torres", partylist: "Alyansa", motto: "Middle Years, Bold Ideas", votes: 44 },
+          { id: 20, name: "Angela Aquino", partylist: "Bagong Simula", motto: "Future in Motion", votes: 44 },
         ]
       },
       {
         title: "2nd Year Senator",
         candidates: [
-          { id: 21, name: "David Lim", partylist: "Alyansa", motto: "Fresh Voice for Change", votes: 0 },
-          { id: 22, name: "Sarah Soriano", partylist: "Bagong Simula", motto: "New Generation Leadership", votes: 0 },
+          { id: 21, name: "David Lim", partylist: "Alyansa", motto: "Fresh Voice for Change", votes: 47 },
+          { id: 22, name: "Sarah Soriano", partylist: "Bagong Simula", motto: "New Generation Leadership", votes: 41 },
         ]
       },
     ]
@@ -108,12 +103,12 @@ const ELECTIONS = [
   {
     id: 2, name: "BSIT Departmental Election 2026", status: "upcoming",
     candidates: 10, startDate: "June 1, 2026", endDate: "June 2, 2026",
-    hasVoted: false, positions: []
+    hasVoted: false, voterIds: [], positions: []
   },
   {
     id: 3, name: "Test Election 1", status: "closed",
     candidates: 18, startDate: "May 18, 2026", endDate: "May 19, 2026",
-    hasVoted: false, positions: []
+    hasVoted: false, voterIds: [], positions: []
   }
 ];
 
@@ -132,9 +127,8 @@ const MOON_ICON = `<svg width="18" height="18" fill="none" stroke="currentColor"
 function applyTheme(dark) {
   isDark = dark;
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  // When dark mode is ON, show the sun icon (to switch TO light). When light, show moon.
   const icon = dark ? SUN_ICON : MOON_ICON;
-  document.querySelectorAll('#theme-btn, #theme-btn-landing, #theme-btn-login').forEach(b => { if (b) b.innerHTML = icon; });
+  document.querySelectorAll('#theme-btn, #theme-btn-landing, #theme-btn-login, #theme-btn-create').forEach(b => { if (b) b.innerHTML = icon; });
 }
 
 function toggleTheme() {
@@ -151,15 +145,141 @@ function hidePage(id) {
   if (el) el.style.display = 'none';
 }
 
-// ── NAVIGATION (landing → login) ──
-function showLogin() {
+function hideAllPages() {
   hidePage('landing-page');
+  hidePage('login-page');
+  hidePage('create-account-page');
+  hidePage('main-app');
+}
+
+// ── NAVIGATION (landing → login / create) ──
+function showLogin() {
+  hideAllPages();
   showPage('login-page', 'flex');
+}
+
+function showCreateAccount() {
+  hideAllPages();
+  showPage('create-account-page', 'flex');
+}
+
+function goToCreateAccount() {
+  showCreateAccount();
+  return false;
+}
+
+// ── REGISTRATION ──
+function handleRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const id = document.getElementById('reg-id').value.trim();
+  const course = document.getElementById('reg-course').value;
+  const section = document.getElementById('reg-section').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  const errEl = document.getElementById('reg-error');
+
+  const showErr = (msg) => { errEl.style.display = 'block'; errEl.textContent = msg; };
+  errEl.style.display = 'none';
+
+  if (!name) return showErr('Please enter your full name.');
+  if (!id) return showErr('Please enter your Student ID.');
+
+  if (!course) return showErr('Please select your course.');
+  if (!section) return showErr('Please enter your year & section.');
+  if (!pass) return showErr('Please enter a password.');
+  if (pass.length < 6) return showErr('Password must be at least 6 characters.');
+  if (pass !== pass2) return showErr('Passwords do not match.');
+
+  // Check if student ID already registered
+  if (ACCOUNTS[id]) {
+    return showErr(`Student ID ${id} is already registered. Please log in instead.`);
+  }
+
+  // Create new account
+  const now = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const memberSince = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+
+  ACCOUNTS[id] = {
+    password: pass,
+    name: name,
+    studentId: id,
+    course: course,
+    yearSection: section,
+    email: 'Not set',
+    birthday: 'Not set',
+    address: 'Not set',
+    phone: 'Not set',
+    memberSince: memberSince,
+    faceEnrolled: false,
+    votingHistory: []
+  };
+
+  showToast(`✅ Account created! Welcome, ${name.split(' ')[0]}!`);
+
+  // Auto-login
+  STUDENT = { ...ACCOUNTS[id] };
+  hideAllPages();
+  showPage('main-app', 'block');
+  navigate('elections');
+}
+
+// ── LOGIN ──
+function handleLogin() {
+  const id = document.getElementById('login-id').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  if (!id || !pass) { showToast('Please fill in all fields'); return; }
+  const account = ACCOUNTS[id];
+  if (!account || account.password !== pass) {
+    showToast('❌ Invalid Student ID or password');
+    document.getElementById('login-pass').value = '';
+    return;
+  }
+
+  STUDENT = { ...account };
+  ELECTIONS.forEach(e => {
+    if (e.voterIds && e.voterIds.includes(STUDENT.studentId)) {
+      e.hasVoted = true;
+    } else {
+      e.hasVoted = false;
+    }
+  });
+
+  hideAllPages();
+  showPage('main-app', 'block');
+  navigate('elections');
+  showToast(`Welcome, ${STUDENT.name.split(' ')[0]}! 👋`);
+}
+
+function showAccountsList() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;display:flex;align-items:flex-end;justify-content:center;padding:0';
+  overlay.innerHTML = `
+        <div style="background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 24px 40px;max-height:80vh;overflow-y:auto">
+            <div style="width:40px;height:4px;border-radius:2px;background:var(--border);margin:16px auto 20px"></div>
+            <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:6px">Survey Accounts</h2>
+            <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Tap an account to auto-fill login. All passwords: <strong>iboto123</strong></p>
+            ${Object.values(ACCOUNTS).filter(a => a.studentId.startsWith('21-000')).map(a => `
+                <div onclick="fillLogin('${a.studentId}','${a.password}');document.body.removeChild(document.body.lastChild)" style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;cursor:pointer;margin-bottom:6px;border:1px solid var(--border);transition:all 0.2s" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green-mid));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">${a.name.charAt(0)}</div>
+                    <div style="flex:1;min-width:0">
+                        <div style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.name}</div>
+                        <div style="font-size:12px;color:var(--subtext)">${a.studentId} · ${a.course}</div>
+                    </div>
+                </div>`).join('')}
+        </div>`;
+  overlay.onclick = e => { if (e.target === overlay) document.body.removeChild(overlay); };
+  document.body.appendChild(overlay);
+}
+
+function fillLogin(id, pass) {
+  document.getElementById('login-id').value = id;
+  document.getElementById('login-pass').value = pass;
 }
 
 // ── NAVIGATION (app pages) ──
 function navigate(page) {
-  if (!STUDENT) { hidePage('main-app'); showPage('landing-page', 'flex'); return; }
+  if (!STUDENT) { hideAllPages(); showPage('landing-page', 'flex'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const pageEl = document.getElementById('page-' + page);
@@ -182,53 +302,15 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── LOGIN ──
-function handleLogin() {
-  const id = document.getElementById('login-id').value.trim();
-  const pass = document.getElementById('login-pass').value.trim();
-  if (!id || !pass) { showToast('Please fill in all fields'); return; }
-  const account = ACCOUNTS[id];
-  if (!account || account.password !== pass) {
-    showToast('❌ Invalid Student ID or password');
-    document.getElementById('login-pass').value = '';
-    return;
-  }
-  STUDENT = { ...account, hasVoted: false, trustedDevice: 'This device', browser: 'Chrome' };
-  hidePage('login-page');
-  showPage('main-app', 'block');
-  navigate('elections');
-  showToast(`Welcome, ${STUDENT.name.split(' ')[0]}! 👋`);
-}
-
-function showAccountsList() {
-  const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;display:flex;align-items:flex-end;justify-content:center;padding:0';
-  overlay.innerHTML = `
-        <div style="background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 24px 40px;max-height:80vh;overflow-y:auto">
-            <div style="width:40px;height:4px;border-radius:2px;background:var(--border);margin:16px auto 20px"></div>
-            <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:6px">Survey Accounts</h2>
-            <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Tap an account to auto-fill login. All passwords: <strong>iboto123</strong></p>
-            ${Object.values(ACCOUNTS).map(a => `
-                <div onclick="fillLogin('${a.studentId}','${a.password}');document.body.removeChild(document.body.lastChild)" style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;cursor:pointer;margin-bottom:6px;border:1px solid var(--border);transition:all 0.2s" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
-                    <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green-mid));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0">${a.name.charAt(0)}</div>
-                    <div style="flex:1;min-width:0">
-                        <div style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.name}</div>
-                        <div style="font-size:12px;color:var(--subtext)">${a.studentId} · ${a.course}</div>
-                    </div>
-                </div>`).join('')}
-        </div>`;
-  overlay.onclick = e => { if (e.target === overlay) document.body.removeChild(overlay); };
-  document.body.appendChild(overlay);
-}
-
-function fillLogin(id, pass) {
-  document.getElementById('login-id').value = id;
-  document.getElementById('login-pass').value = pass;
+// ── HELPER: Format Student ID ──
+function formatStudentId(id) {
+  if (!id) return '—';
+  return id;
 }
 
 // ── ELECTIONS PAGE ──
 function renderElections() {
-  if (!STUDENT) { hidePage('main-app'); showPage('landing-page', 'flex'); return; }
+  if (!STUDENT) { hideAllPages(); showPage('landing-page', 'flex'); return; }
   const live = ELECTIONS.filter(e => e.status === 'live');
   const upcoming = ELECTIONS.filter(e => e.status === 'upcoming');
   const closed = ELECTIONS.filter(e => e.status === 'closed');
@@ -238,7 +320,7 @@ function renderElections() {
   // Greeting
   html += `<div class="fade-up-1" style="padding:24px 0 8px">
     <p style="font-size:14px;color:var(--subtext);margin-bottom:4px">Welcome back,</p>
-    <h1 class="section-title">${STUDENT ? STUDENT.name.split(' ')[0] : 'Student'}! 👋</h1>
+    <h1 class="section-title">${STUDENT.name.split(' ')[0]}! 👋</h1>
     <p style="font-size:14px;color:var(--subtext);margin-top:4px">Cast your vote and make your voice count.</p>
   </div>`;
 
@@ -321,7 +403,6 @@ function openBallot(electionId) {
   currentElection = ELECTIONS.find(e => e.id === electionId);
   if (currentElection.hasVoted) { showToast('You have already voted in this election'); return; }
   if (!currentElection.positions.length) { showToast('No positions configured yet'); return; }
-  // Show password verify screen
   pendingElectionId = electionId;
   document.getElementById('verify-password').value = '';
   document.getElementById('verify-error').style.display = 'none';
@@ -344,7 +425,6 @@ function confirmIdentity() {
     return;
   }
 
-  // Check against current student's password in ACCOUNTS
   const account = ACCOUNTS[STUDENT.studentId];
   if (!account || password !== account.password) {
     errEl.style.display = 'block';
@@ -354,7 +434,6 @@ function confirmIdentity() {
     return;
   }
 
-  // Password correct — proceed to ballot
   hidePage('verify-modal');
   proceedToBallot();
 }
@@ -379,7 +458,6 @@ function renderBallotPosition() {
   document.getElementById('ballot-progress-fill').style.width = progress + '%';
   document.getElementById('ballot-step').textContent = `Position ${currentPositionIndex + 1} of ${total}`;
 
-  // Update prev button
   const prevBtn = document.getElementById('ballot-prev-btn');
   prevBtn.style.display = 'flex';
   prevBtn.disabled = false;
@@ -396,15 +474,15 @@ function renderBallotPosition() {
     const selected = selectedVotes[pos.title] === c.id;
     html += `
       <div onclick="selectCandidate('${pos.title}', ${c.id})" class="candidate-card${selected ? ' selected' : ''}">
-<div class="avatar">${c.name.charAt(0)}</div>
-<div style="flex:1">
-  <div style="font-weight:700;font-size:15px">${c.name}</div>
-  <div style="font-size:13px;color:var(--subtext)">🏛 ${c.partylist}</div>
-  <div style="font-size:12px;color:var(--subtext);font-style:italic;margin-top:2px">"${c.motto}"</div>
-</div>
-<div class="candidate-radio">
-  ${selected ? '<svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
-</div>
+        <div class="avatar">${c.name.charAt(0)}</div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">${c.name}</div>
+          <div style="font-size:13px;color:var(--subtext)">🏛 ${c.partylist}</div>
+          <div style="font-size:12px;color:var(--subtext);font-style:italic;margin-top:2px">"${c.motto}"</div>
+        </div>
+        <div class="candidate-radio">
+          ${selected ? '<svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+        </div>
       </div>`;
   });
 
@@ -437,7 +515,6 @@ function prevBallotPosition() {
     renderBallotPosition();
     document.getElementById('ballot-next-btn').style.display = 'flex';
   } else {
-    // Back to elections from first position
     closeBallot();
   }
 }
@@ -456,15 +533,15 @@ function reviewBallot() {
     const candidate = p.candidates.find(c => c.id === candidateId);
     if (candidate) {
       html += `
-<div style="padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);
-  background:var(--card);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
-  <div>
-    <div style="font-size:12px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px">${p.title}</div>
-    <div style="font-size:15px;font-weight:600;margin-top:2px">${candidate.name}</div>
-    <div style="font-size:12px;color:var(--subtext)">${candidate.partylist}</div>
-  </div>
-  <svg width="18" height="18" fill="none" stroke="var(--green-mid)" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-</div>`;
+        <div style="padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);
+          background:var(--card);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px">${p.title}</div>
+            <div style="font-size:15px;font-weight:600;margin-top:2px">${candidate.name}</div>
+            <div style="font-size:12px;color:var(--subtext)">${candidate.partylist}</div>
+          </div>
+          <svg width="18" height="18" fill="none" stroke="var(--green-mid)" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>`;
     }
   });
 
@@ -476,7 +553,6 @@ function reviewBallot() {
 
   document.getElementById('ballot-candidates').innerHTML = html;
 
-  // In review: prev goes back to last position, next submits
   const nextBtn = document.getElementById('ballot-next-btn');
   nextBtn.textContent = 'Submit Ballot 🔒';
   nextBtn.onclick = submitBallot;
@@ -494,7 +570,39 @@ function reviewBallot() {
   document.getElementById('ballot-progress-fill').style.width = '100%';
 }
 
+// ── SUBMIT BALLOT — TALLIES VOTES INTO RESULTS ──
 function submitBallot() {
+  // Tally each selected vote into the election's candidate vote counts
+  const election = ELECTIONS.find(e => e.id === currentElection.id);
+  election.positions.forEach(pos => {
+    const selectedCandidateId = selectedVotes[pos.title];
+    if (selectedCandidateId !== undefined) {
+      const candidate = pos.candidates.find(c => c.id === selectedCandidateId);
+      if (candidate) {
+        candidate.votes += 1;
+      }
+    }
+  });
+
+  // Mark this student as voted — prevent double voting
+  if (!election.voterIds) election.voterIds = [];
+  if (!election.voterIds.includes(STUDENT.studentId)) {
+    election.voterIds.push(STUDENT.studentId);
+  }
+  election.hasVoted = true;
+
+  // Update student voting history
+  if (STUDENT && !STUDENT.votingHistory.includes(election.name)) {
+    STUDENT.votingHistory.push(election.name);
+  }
+  // Also update the account record
+  const account = ACCOUNTS[STUDENT.studentId];
+  if (account && !account.votingHistory.includes(election.name)) {
+    account.votingHistory.push(election.name);
+  }
+
+  ballotSubmitted = true;
+
   document.getElementById('ballot-candidates').innerHTML = `
     <div style="text-align:center;padding:60px 0" class="fade-up">
       <div style="font-size:72px;margin-bottom:16px">🗳️</div>
@@ -505,11 +613,6 @@ function submitBallot() {
     </div>`;
   document.getElementById('ballot-next-btn').style.display = 'none';
   document.getElementById('ballot-prev-btn').style.display = 'none';
-  ELECTIONS.find(e => e.id === currentElection.id).hasVoted = true;
-  if (STUDENT && !STUDENT.votingHistory.includes(currentElection.name)) {
-    STUDENT.votingHistory.push(currentElection.name);
-  }
-  ballotSubmitted = true;
 }
 
 function closeBallot() {
@@ -520,9 +623,54 @@ function closeBallot() {
 }
 
 // ── RESULTS PAGE ──
+// Shows live election results (with votes tallied in real-time) + past results
 function renderResults() {
   const container = document.getElementById('results-list');
+  if (!window.expandedResults) window.expandedResults = {};
 
+  let html = `<div class="fade-up-1" style="padding:24px 0 8px">
+    <h1 class="section-title">Results</h1>
+    <p class="section-sub">Live & official results per position</p>
+  </div>`;
+
+  // ── LIVE ELECTION RESULTS (real-time tally) ──
+  const liveElections = ELECTIONS.filter(e => e.status === 'live' && e.positions.length > 0);
+  if (liveElections.length > 0) {
+    html += `<div class="fade-up-2" style="margin:0 0 10px;display:flex;align-items:center;gap:8px">
+      <div style="width:24px;height:3px;background:var(--green-mid);border-radius:2px"></div>
+      <h2 style="font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--subtext)">Live Tally</h2>
+      <span class="badge badge-live" style="font-size:11px;padding:2px 8px"><span class="dot-live"></span> Updating</span>
+    </div>`;
+
+    liveElections.forEach((election, ei) => {
+      const expandKey = 'live_' + ei;
+      const isExpanded = window.expandedResults[expandKey] !== false;
+
+      // Compute total votes across all positions (use president as proxy for voter count)
+      const presPos = election.positions[0];
+      const totalVotesCast = presPos ? presPos.candidates.reduce((s, c) => s + c.votes, 0) : 0;
+
+      html += `
+      <div class="card fade-up-${ei + 2}" style="margin-bottom:16px;border-left:3px solid var(--green-mid)">
+        <div style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div>
+              <span class="badge badge-live" style="margin-bottom:8px"><span class="dot-live"></span> Live</span>
+              <h3 style="font-size:15px;font-weight:700">${election.name}</h3>
+              <p style="font-size:12px;color:var(--subtext);margin-top:2px">📅 ${election.startDate} – ${election.endDate}</p>
+            </div>
+            <button onclick="toggleResults('${expandKey}')" style="background:var(--green-pale);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--green-mid);cursor:pointer;white-space:nowrap">
+              ${isExpanded ? 'Hide ▲' : 'Show ▼'}
+            </button>
+          </div>
+          <div style="font-size:13px;color:var(--subtext);margin-bottom:4px">🗳️ ${totalVotesCast} votes cast so far</div>
+        </div>
+        ${isExpanded ? renderLivePositions(election) : ''}
+      </div>`;
+    });
+  }
+
+  // ── PAST RESULTS ──
   const PAST_RESULTS = [
     {
       name: "SSG General Election 2025",
@@ -557,85 +705,135 @@ function renderResults() {
     }
   ];
 
-  // Track expanded state per election
-  if (!window.expandedResults) window.expandedResults = {};
-
-  let html = `<div class="fade-up-1" style="padding:24px 0 8px">
-        <h1 class="section-title">Results</h1>
-        <p class="section-sub">Official winners per position</p>
-    </div>`;
+  html += `<div class="fade-up-3" style="margin:24px 0 10px;display:flex;align-items:center;gap:8px">
+    <div style="width:24px;height:3px;background:var(--border);border-radius:2px"></div>
+    <h2 style="font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--subtext)">Past Elections</h2>
+  </div>`;
 
   PAST_RESULTS.forEach((election, ei) => {
     const turnout = Math.round(election.voted / election.totalVoters * 100);
-    const isExpanded = window.expandedResults[ei] !== false; // default expanded
+    const expandKey = 'past_' + ei;
+    const isExpanded = window.expandedResults[expandKey] !== false;
     html += `
-        <div class="card fade-up-${ei + 2}" style="margin-bottom:16px">
-            <div style="margin-bottom:14px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-                    <div>
-                        <span class="badge badge-closed" style="margin-bottom:8px">Closed</span>
-                        <h3 style="font-size:15px;font-weight:700">${election.name}</h3>
-                        <p style="font-size:12px;color:var(--subtext);margin-top:2px">📅 ${election.date}</p>
-                    </div>
-                    <button onclick="toggleResults(${ei})" style="background:var(--green-pale);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--green-mid);cursor:pointer;white-space:nowrap">
-                        ${isExpanded ? 'Hide ▲' : 'Show ▼'}
-                    </button>
-                </div>
-                <div style="display:flex;gap:16px;font-size:13px;color:var(--subtext);margin-bottom:12px">
-                    <span>👥 ${election.voted} voted</span>
-                    <span>📊 ${turnout}% turnout</span>
-                </div>
-                <div class="progress-bar" style="margin-bottom:4px">
-                    <div class="progress-fill" style="width:${turnout}%"></div>
-                </div>
-            </div>
-            ${isExpanded ? `
-            <div id="results-detail-${ei}">
-                <div style="font-size:11px;font-weight:700;color:var(--subtext);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
-                    <div style="flex:1;height:1px;background:var(--border)"></div>
-                    Winners by Position
-                    <div style="flex:1;height:1px;background:var(--border)"></div>
-                </div>
-                ${election.winners.map(w => {
+      <div class="card fade-up-${ei + 4}" style="margin-bottom:16px">
+          <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+                  <div>
+                      <span class="badge badge-closed" style="margin-bottom:8px">✕ Closed</span>
+                      <h3 style="font-size:15px;font-weight:700">${election.name}</h3>
+                      <p style="font-size:12px;color:var(--subtext);margin-top:2px">📅 ${election.date}</p>
+                  </div>
+                  <button onclick="toggleResults('${expandKey}')" style="background:var(--green-pale);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--green-mid);cursor:pointer;white-space:nowrap">
+                      ${isExpanded ? 'Hide ▲' : 'Show ▼'}
+                  </button>
+              </div>
+              <div style="display:flex;gap:16px;font-size:13px;color:var(--subtext);margin-bottom:12px">
+                  <span>👥 ${election.voted} voted</span>
+                  <span>📊 ${turnout}% turnout</span>
+              </div>
+              <div class="progress-bar" style="margin-bottom:4px">
+                  <div class="progress-fill" style="width:${turnout}%"></div>
+              </div>
+          </div>
+          ${isExpanded ? `
+          <div>
+              <div style="font-size:11px;font-weight:700;color:var(--subtext);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;height:1px;background:var(--border)"></div>
+                  Winners by Position
+                  <div style="flex:1;height:1px;background:var(--border)"></div>
+              </div>
+              ${election.winners.map(w => {
       const pct = Math.round(w.votes / w.totalVotes * 100);
       return `
-                    <div style="padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg);margin-bottom:8px">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-                            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green-mid));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0">${w.name.charAt(0)}</div>
-                            <div style="flex:1">
-                                <div style="font-size:11px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px">${w.position}</div>
-                                <div style="font-size:14px;font-weight:700">${w.name}</div>
-                                <div style="font-size:12px;color:var(--subtext)">🏛 ${w.partylist}</div>
-                            </div>
-                            <div style="text-align:right">
-                                <div style="font-size:16px;font-weight:800;color:var(--green-mid)">${pct}%</div>
-                                <div style="font-size:11px;color:var(--subtext)">${w.votes} votes</div>
-                            </div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width:${pct}%"></div>
-                        </div>
-                    </div>`;
+                  <div style="padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg);margin-bottom:8px">
+                      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green-dark),var(--green-mid));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;flex-shrink:0">${w.name.charAt(0)}</div>
+                          <div style="flex:1">
+                              <div style="font-size:11px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px">${w.position}</div>
+                              <div style="font-size:14px;font-weight:700">${w.name}</div>
+                              <div style="font-size:12px;color:var(--subtext)">🏛 ${w.partylist}</div>
+                          </div>
+                          <div style="text-align:right">
+                              <div style="font-size:16px;font-weight:800;color:var(--green-mid)">${pct}%</div>
+                              <div style="font-size:11px;color:var(--subtext)">${w.votes} votes</div>
+                          </div>
+                      </div>
+                      <div class="progress-bar">
+                          <div class="progress-fill" style="width:${pct}%"></div>
+                      </div>
+                  </div>`;
     }).join('')}
-            </div>` : `<div id="results-detail-${ei}"></div>`}
-        </div>`;
+          </div>` : ''}
+      </div>`;
   });
 
   container.innerHTML = html;
 }
 
-function toggleResults(ei) {
+// Render live position results with real-time bars
+function renderLivePositions(election) {
+  let html = `<div>
+    <div style="font-size:11px;font-weight:700;color:var(--subtext);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+      Live Vote Count
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+    </div>`;
+
+  election.positions.forEach(pos => {
+    const totalVotes = pos.candidates.reduce((s, c) => s + c.votes, 0);
+    // Sort by votes descending to show leader first
+    const sorted = [...pos.candidates].sort((a, b) => b.votes - a.votes);
+
+    html += `<div style="margin-bottom:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">${pos.title}</div>`;
+
+    sorted.forEach((c, idx) => {
+      const pct = totalVotes > 0 ? Math.round((c.votes / totalVotes) * 100) : 0;
+      const isLeading = idx === 0 && c.votes > 0;
+      html += `
+        <div style="padding:10px 12px;border-radius:10px;border:1px solid ${isLeading ? 'rgba(45,140,78,0.3)' : 'var(--border)'};background:${isLeading ? 'var(--green-pale)' : 'var(--bg)'};margin-bottom:6px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <div style="display:flex;align-items:center;gap:8px">
+              ${isLeading ? '<span style="font-size:12px">🏆</span>' : '<span style="font-size:12px;opacity:0.4">·</span>'}
+              <div>
+                <div style="font-size:13px;font-weight:700">${c.name}</div>
+                <div style="font-size:11px;color:var(--subtext)">${c.partylist}</div>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:15px;font-weight:800;color:${isLeading ? 'var(--green-mid)' : 'var(--text)'}">${pct}%</div>
+              <div style="font-size:11px;color:var(--subtext)">${c.votes} vote${c.votes !== 1 ? 's' : ''}</div>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${pct}%;background:${isLeading ? 'linear-gradient(90deg,var(--green-dark),var(--green-mid))' : 'var(--border)'}"></div>
+          </div>
+        </div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  html += `</div>`;
+  return html;
+}
+
+function toggleResults(key) {
   if (!window.expandedResults) window.expandedResults = {};
-  window.expandedResults[ei] = !(window.expandedResults[ei] !== false);
+  window.expandedResults[key] = !(window.expandedResults[key] !== false);
   renderResults();
 }
 
 // ── PROFILE PAGE ──
 function renderProfile() {
-  if (!STUDENT) { hidePage('main-app'); showPage('landing-page', 'flex'); return; }
-  const initials = STUDENT.name.split(' ').map(n => n[0]).join('').slice(0, 2);
-  const votedCount = STUDENT.votingHistory ? STUDENT.votingHistory.length : 0;
+  if (!STUDENT) { hideAllPages(); showPage('landing-page', 'flex'); return; }
+
   const container = document.getElementById('profile-content');
+  if (!container) return;
+
+  const nameParts = STUDENT.name ? STUDENT.name.split(' ') : ['S'];
+  const initials = nameParts.map(n => n[0]).join('').slice(0, 2).toUpperCase();
+  const votedCount = STUDENT.votingHistory ? STUDENT.votingHistory.length : 0;
 
   container.innerHTML = `
     <!-- Header -->
@@ -737,7 +935,7 @@ function renderProfile() {
         <p class="profile-section-label">Device</p>
         <div class="security-row">
             <div><div class="security-label" style="font-size:13px">Trusted device</div></div>
-            <span class="badge badge-device">${STUDENT.trustedDevice || 'Not trusted'}</span>
+            <span class="badge badge-device">${STUDENT.trustedDevice || 'This device'}</span>
         </div>
         <div class="divider" style="margin:8px 0"></div>
         <div class="security-row">
@@ -756,117 +954,151 @@ function renderProfile() {
 function pRow(label, value) {
   const isMuted = !value || value === 'Not set' || value === '—';
   return `<div class="profile-row">
-        <div style="flex:1">
-            <div class="profile-row-label">${label}</div>
-            <div class="profile-row-value ${isMuted ? 'muted' : ''}">${value || 'Not set'}</div>
-        </div>
-    </div>`;
+    <div style="flex:1">
+      <div class="profile-row-label">${label}</div>
+      <div class="profile-row-value ${isMuted ? 'muted' : ''}">${value || 'Not set'}</div>
+    </div>
+  </div>`;
 }
 
 // ── EDIT PROFILE MODAL ──
 function openEditProfile() {
+  const birthdayValue = STUDENT.birthday && STUDENT.birthday !== 'Not set' ? toDateInputValue(STUDENT.birthday) : '';
   openModal(`
-        <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Edit Profile</h2>
-        <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Update your personal information</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
-            <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Full Name</label>
-            <input class="input-field" id="edit-name" value="${STUDENT.name}"></div>
-            <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Email</label>
-            <input class="input-field" id="edit-email" value="${STUDENT.email !== 'Not set' ? STUDENT.email : ''}" placeholder="your@email.com"></div>
-            <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Phone</label>
-            <input class="input-field" id="edit-phone" value="${STUDENT.phone !== 'Not set' ? STUDENT.phone : ''}" placeholder="09XXXXXXXXX"></div>
-            <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Address</label>
-            <input class="input-field" id="edit-address" value="${STUDENT.address !== 'Not set' ? STUDENT.address : ''}" placeholder="Barangay, City"></div>
-            <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Year &amp; Section</label>
-            <input class="input-field" id="edit-section" value="${STUDENT.yearSection !== 'Not set' ? STUDENT.yearSection : ''}" placeholder="e.g. 2C"></div>
-        </div>
-        <div style="display:flex;gap:10px;margin-top:20px">
-            <button class="btn-prev" onclick="closeModal()" style="flex:1">Cancel</button>
-            <button class="btn-primary" onclick="saveProfile()" style="flex:2">Save Changes</button>
-        </div>
-    `);
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Edit Profile</h2>
+    <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Update your personal information</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Full Name</label>
+        <input class="input-field" id="edit-name" value="${STUDENT.name}"></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Email</label>
+        <input class="input-field" id="edit-email" value="${STUDENT.email !== 'Not set' ? STUDENT.email : ''}" placeholder="your@email.com"></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Phone</label>
+        <input class="input-field" id="edit-phone" value="${STUDENT.phone !== 'Not set' ? STUDENT.phone : ''}" placeholder="09XXXXXXXXX"></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Birthday</label>
+        <input class="input-field" id="edit-birthday" type="date" value="${birthdayValue}"></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Address</label>
+        <input class="input-field" id="edit-address" value="${STUDENT.address !== 'Not set' ? STUDENT.address : ''}" placeholder="Barangay, City"></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Year &amp; Section</label>
+        <input class="input-field" id="edit-section" value="${STUDENT.yearSection !== 'Not set' ? STUDENT.yearSection : ''}" placeholder="e.g. 2C"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn-prev" onclick="closeModal()" style="flex:1">Cancel</button>
+        <button class="btn-primary" onclick="saveProfile()" style="flex:2">Save Changes</button>
+    </div>
+  `);
 }
 
 function saveProfile() {
   const name = document.getElementById('edit-name').value.trim();
   const email = document.getElementById('edit-email').value.trim();
   const phone = document.getElementById('edit-phone').value.trim();
+  const birthday = document.getElementById('edit-birthday').value;
   const address = document.getElementById('edit-address').value.trim();
   const section = document.getElementById('edit-section').value.trim();
   if (!name) { showToast('Name is required'); return; }
   STUDENT.name = name;
   STUDENT.email = email || 'Not set';
   STUDENT.phone = phone || 'Not set';
+  STUDENT.birthday = birthday ? toDateDisplay(birthday) : 'Not set';
   STUDENT.address = address || 'Not set';
   STUDENT.yearSection = section || 'Not set';
+  // Sync back to ACCOUNTS
+  if (ACCOUNTS[STUDENT.studentId]) {
+    Object.assign(ACCOUNTS[STUDENT.studentId], { name, email: STUDENT.email, phone: STUDENT.phone, birthday: STUDENT.birthday, address: STUDENT.address, yearSection: STUDENT.yearSection });
+  }
   closeModal();
   renderProfile();
   showToast('✅ Profile updated!');
 }
 
+function toDateInputValue(birthdayText) {
+  const parsed = new Date(birthdayText);
+  if (!isNaN(parsed)) {
+    const year = parsed.getFullYear();
+    const month = String(parsed.getMonth() + 1).padStart(2, '0');
+    const day = String(parsed.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const parts = birthdayText.split(' ');
+  if (parts.length < 3) return '';
+  const month = monthNames.indexOf(parts[0]);
+  const day = parts[1].replace(',', '');
+  const year = parts[2];
+  if (month < 0) return '';
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function toDateDisplay(value) {
+  const [year, month, day] = value.split('-');
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return `${monthNames[Number(month) - 1]} ${Number(day)}, ${year}`;
+}
+
 // ── FACE VERIFICATION MODAL ──
 function openFaceVerification() {
   openModal(`
-        <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Face Verification</h2>
-        <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">${STUDENT.faceEnrolled ? 'Your face is enrolled. You can re-enroll below.' : 'Enroll your face for biometric verification during voting.'}</p>
-        <div id="face-content">
-            <div style="width:100%;aspect-ratio:1;border-radius:16px;background:var(--bg);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:20px;position:relative;overflow:hidden" id="face-preview">
-                <span style="font-size:48px;margin-bottom:8px">📷</span>
-                <p style="font-size:13px;color:var(--subtext);text-align:center">Camera will activate here<br>in the real app</p>
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:160px;height:160px;border:3px solid var(--green-mid);border-radius:50%;opacity:0.4;pointer-events:none"></div>
-            </div>
-            <p style="font-size:12px;color:var(--subtext);text-align:center;margin-bottom:20px">Position your face within the circle. Make sure you're in a well-lit area.</p>
-            <button class="btn-primary" onclick="simulateFaceEnroll()">
-                ${STUDENT.faceEnrolled ? '🔄 Re-enroll Face' : '📸 Capture & Enroll Face'}
-            </button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Face Verification</h2>
+    <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">${STUDENT.faceEnrolled ? 'Your face is enrolled. You can re-enroll below.' : 'Enroll your face for biometric verification during voting.'}</p>
+    <div id="face-content">
+        <div style="width:100%;aspect-ratio:1;border-radius:16px;background:var(--bg);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:20px;position:relative;overflow:hidden" id="face-preview">
+            <span style="font-size:48px;margin-bottom:8px">📷</span>
+            <p style="font-size:13px;color:var(--subtext);text-align:center">Camera will activate here<br>in the real app</p>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:160px;height:160px;border:3px solid var(--green-mid);border-radius:50%;opacity:0.4;pointer-events:none"></div>
         </div>
-    `);
+        <p style="font-size:12px;color:var(--subtext);text-align:center;margin-bottom:20px">Position your face within the circle. Make sure you're in a well-lit area.</p>
+        <button class="btn-primary" onclick="simulateFaceEnroll()">
+            ${STUDENT.faceEnrolled ? '🔄 Re-enroll Face' : '📸 Capture & Enroll Face'}
+        </button>
+    </div>
+  `);
 }
 
 function simulateFaceEnroll() {
   document.getElementById('face-content').innerHTML = `
-        <div style="text-align:center;padding:20px 0">
-            <div style="font-size:48px;margin-bottom:12px">⏳</div>
-            <p style="font-size:14px;font-weight:600;margin-bottom:6px">Processing face...</p>
-            <p style="font-size:13px;color:var(--subtext)">Analyzing biometric data</p>
-        </div>`;
+    <div style="text-align:center;padding:20px 0">
+        <div style="font-size:48px;margin-bottom:12px">⏳</div>
+        <p style="font-size:14px;font-weight:600;margin-bottom:6px">Processing face...</p>
+        <p style="font-size:13px;color:var(--subtext)">Analyzing biometric data</p>
+    </div>`;
   setTimeout(() => {
     document.getElementById('face-content').innerHTML = `
-            <div style="text-align:center;padding:20px 0">
-                <div style="font-size:56px;margin-bottom:12px">✅</div>
-                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--green-mid);margin-bottom:8px">Face Enrolled!</h3>
-                <p style="font-size:14px;color:var(--subtext);margin-bottom:20px">Your biometric data has been saved securely.</p>
-                <button class="btn-primary" onclick="closeModal();renderProfile()">Done</button>
-            </div>`;
+      <div style="text-align:center;padding:20px 0">
+          <div style="font-size:56px;margin-bottom:12px">✅</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--green-mid);margin-bottom:8px">Face Enrolled!</h3>
+          <p style="font-size:14px;color:var(--subtext);margin-bottom:20px">Your biometric data has been saved securely.</p>
+          <button class="btn-primary" onclick="closeModal();renderProfile()">Done</button>
+      </div>`;
     STUDENT.faceEnrolled = true;
+    if (ACCOUNTS[STUDENT.studentId]) ACCOUNTS[STUDENT.studentId].faceEnrolled = true;
   }, 2000);
 }
 
 // ── CHANGE PASSWORD MODAL ──
 function openChangePassword() {
   openModal(`
-        <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Change Password</h2>
-        <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Choose a strong password for your account.</p>
-        <div style="display:flex;flex-direction:column;gap:12px">
-            <div>
-                <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Current Password</label>
-                <input class="input-field" type="password" id="pw-current" placeholder="Enter current password">
-            </div>
-            <div>
-                <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">New Password</label>
-                <input class="input-field" type="password" id="pw-new" placeholder="At least 8 characters">
-            </div>
-            <div>
-                <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Confirm New Password</label>
-                <input class="input-field" type="password" id="pw-confirm" placeholder="Repeat new password">
-            </div>
-            <div id="pw-error" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#DC2626;padding:10px 14px;border-radius:8px;font-size:13px"></div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:4px">Change Password</h2>
+    <p style="font-size:13px;color:var(--subtext);margin-bottom:20px">Choose a strong password for your account.</p>
+    <div style="display:flex;flex-direction:column;gap:12px">
+        <div>
+            <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Current Password</label>
+            <input class="input-field" type="password" id="pw-current" placeholder="Enter current password">
         </div>
-        <div style="display:flex;gap:10px;margin-top:20px">
-            <button class="btn-prev" onclick="closeModal()" style="flex:1">Cancel</button>
-            <button class="btn-primary" onclick="savePassword()" style="flex:2">Update Password</button>
+        <div>
+            <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">New Password</label>
+            <input class="input-field" type="password" id="pw-new" placeholder="At least 6 characters">
         </div>
-    `);
+        <div>
+            <label style="font-size:12px;font-weight:700;color:var(--subtext);display:block;margin-bottom:4px">Confirm New Password</label>
+            <input class="input-field" type="password" id="pw-confirm" placeholder="Repeat new password">
+        </div>
+        <div id="pw-error" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#DC2626;padding:10px 14px;border-radius:8px;font-size:13px"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn-prev" onclick="closeModal()" style="flex:1">Cancel</button>
+        <button class="btn-primary" onclick="savePassword()" style="flex:2">Update Password</button>
+    </div>
+  `);
 }
 
 function savePassword() {
@@ -895,9 +1127,9 @@ function openModal(html) {
     overlay.id = 'generic-modal';
     overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;transition:opacity 0.3s';
     overlay.innerHTML = `<div id="generic-modal-sheet" style="background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:480px;padding:0 24px 40px;max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)">
-            <div style="width:40px;height:4px;border-radius:2px;background:var(--border);margin:16px auto 20px"></div>
-            <div id="generic-modal-body"></div>
-        </div>`;
+        <div style="width:40px;height:4px;border-radius:2px;background:var(--border);margin:16px auto 20px"></div>
+        <div id="generic-modal-body"></div>
+    </div>`;
     overlay.onclick = e => { if (e.target === overlay) closeModal(); };
     document.body.appendChild(overlay);
   }
@@ -927,7 +1159,7 @@ if (!document.getElementById('input-style')) {
 
 // ── NOTIFICATIONS ──
 function renderNotifications() {
-  if (!STUDENT) { hidePage('main-app'); showPage('landing-page', 'flex'); return; }
+  if (!STUDENT) { hideAllPages(); showPage('landing-page', 'flex'); return; }
   const notifs = [
     { icon: '🗳️', title: 'Election is now open!', desc: 'SSG General Election 2026 is now accepting votes.', time: '2 mins ago', unread: true },
     { icon: '✅', title: 'Voter registration confirmed', desc: 'Your voter registration has been approved.', time: '1 day ago', unread: false },
@@ -939,13 +1171,13 @@ function renderNotifications() {
   notifs.forEach((n, i) => {
     html += `
       <div class="notif-item ${n.unread ? 'unread' : ''} fade-up-${i + 2}" onclick="showToast('Notification opened')">
-<span class="notif-icon">${n.icon}</span>
-<div style="flex:1">
-  <div class="notif-title">${n.title}</div>
-  <div class="notif-desc">${n.desc}</div>
-  <div class="notif-time">${n.time}</div>
-</div>
-${n.unread ? '<div class="notif-dot"></div>' : ''}
+        <span class="notif-icon">${n.icon}</span>
+        <div style="flex:1">
+          <div class="notif-title">${n.title}</div>
+          <div class="notif-desc">${n.desc}</div>
+          <div class="notif-time">${n.time}</div>
+        </div>
+        ${n.unread ? '<div class="notif-dot"></div>' : ''}
       </div>
       <div class="divider" style="margin:0"></div>`;
   });
@@ -954,8 +1186,8 @@ ${n.unread ? '<div class="notif-dot"></div>' : ''}
 
 // ── LOGOUT ──
 function handleLogout() {
-  hidePage('main-app');
-  hidePage('login-page');
+  STUDENT = null;
+  hideAllPages();
   showPage('landing-page', 'flex');
   document.getElementById('login-id').value = '';
   document.getElementById('login-pass').value = '';
@@ -964,14 +1196,14 @@ function handleLogout() {
 
 // ── INIT ──
 window.onload = () => {
-  hidePage('main-app');
-  hidePage('login-page');
+  hideAllPages();
   showPage('landing-page', 'flex');
-
-  // Apply theme first so icons & colours are correct from the start
   applyTheme(isDark);
 
   document.getElementById('login-pass').addEventListener('keydown', e => {
     if (e.key === 'Enter') handleLogin();
+  });
+  document.getElementById('reg-pass2').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleRegister();
   });
 };
